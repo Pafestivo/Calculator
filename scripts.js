@@ -15,4 +15,10 @@ function multiply([...args]) {
   return sum;
 }
 
+function divide([...args]) {
+  const sum = args.reduce((total, next) => total / next);
+  if (sum === Infinity) return "ERROR"
+  if (sum - Math.floor(sum) === 0) return sum;
+  return sum.toFixed(2);
+}
 //end calculation functions
