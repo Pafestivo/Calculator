@@ -7,13 +7,18 @@ const decimal = document.getElementById('decimal');
 const equalOperator = document.getElementById('equal');
 const sumOperator = document.getElementById('sum');
 
+//adding even listener to every individual number key.
 let displayValue;
-numbersData.forEach((button) => {
-  button.addEventListener('click', () => {
-    displayValue = button.textContent;
-    console.log(displayValue);
-  })
-})
+numbersData.forEach((key) => key.addEventListener('click', () => {
+  displayValue = key.textContent;
+  console.log(displayValue);
+}))
+
+//same for every individual operator key.
+operatorsData.forEach((key) => key.addEventListener('click', () => {
+  displayValue = key.textContent;
+  console.log(displayValue);
+}))
 
 
 //calculation functions
