@@ -22,7 +22,7 @@ numbersData.forEach((key) => key.addEventListener('click', () => {
 //same for every individual operator key.
 operatorsData.forEach((key) => key.addEventListener('click', () => {
   displayValue = key.textContent;
-  screenInput.textContent += displayValue;
+  screenInput.textContent += " " + displayValue + " ";
 }))
 
 //clear the calc screen
@@ -36,6 +36,14 @@ deleteBtn.addEventListener('click', () => {
   const newString = screenInput.textContent.slice(0, -1)
   screenInput.textContent = newString;
 });
+
+//calculate
+equalOperator.addEventListener('click', calculate);
+
+function calculate() {
+  const parameter = Array.from(screenInput.textContent.replaceAll(" ", "").replace("x", "*").replace("=", ""));
+  screenOutput.textContent = operate(parameter);
+}
 
 
 //calculation functions
@@ -63,7 +71,7 @@ function divide(a, b) {
 //end calculation functions
 
 //operate
-function operate(a, operator, b) {
+function operate([a, operator, b]) {
   if (operator === "+") {
     return add(a, b)
   } else if (operator === "-") {
@@ -75,3 +83,4 @@ function operate(a, operator, b) {
   }
 }
 //operate
+
