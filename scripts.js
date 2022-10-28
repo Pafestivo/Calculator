@@ -31,6 +31,12 @@ clearBtn.addEventListener('click', () => {
   screenOutput.textContent = ""
 });
 
+//delete last digit
+deleteBtn.addEventListener('click', () => {
+  const newString = screenInput.textContent.slice(0, -1)
+  screenInput.textContent = newString;
+});
+
 
 //calculation functions
 function add(a, b) {
