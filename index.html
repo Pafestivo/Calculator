@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
   <script src="scripts.js" defer></script>
   <title>Calculator</title>
 </head>
@@ -13,12 +16,12 @@
   </header>
   <div class="calc-box">
     <div class="calc-screen">
-      <p class="calc-input">5 x 5</p>
+      <p class="calc-input">5 x 5 =</p>
       <p class="calc-output">25</p>
-    </div>
+    </div> <!-- /calc-screen-->
     <div class="top-btns">
-      <div class="top-btn"></div>
-      <div class="top-btn"></div>
+      <button id="clear" class="top-btn">Clear</button>
+      <button id="delete" class="top-btn">Delete</button>
     </div> <!-- /top-btns-->
     <div class="all-btns">
       <div class="box">7</div>
