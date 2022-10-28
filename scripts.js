@@ -41,7 +41,8 @@ deleteBtn.addEventListener('click', () => {
 equalOperator.addEventListener('click', calculate);
 
 function calculate() {
-  const parameter = Array.from(screenInput.textContent.replaceAll(" ", "").replace("x", "*").replace("=", ""));
+  const parameter = Array.from(screenInput.textContent.replace('x', '*').split(' '));
+  console.log(parameter);
   screenOutput.textContent = operate(parameter);
 }
 
@@ -83,4 +84,3 @@ function operate([a, operator, b]) {
   }
 }
 //operate
-
