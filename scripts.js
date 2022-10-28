@@ -58,6 +58,7 @@ equalOperator.addEventListener('click', calculate);
 function calculate() {
   const parameter = Array.from(screenInput.textContent.replace('x', '*').replace('=', '').split(' ').splice(0, 3));
   screenOutput.textContent = operate(parameter);
+  console.log(parameter);
 }
 
 
