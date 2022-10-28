@@ -12,17 +12,23 @@ const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
 
 
-//adding even listener to every individual number key.
-let displayValue;
+//adding event listener to every individual number key.
+let keyInput;
 numbersData.forEach((key) => key.addEventListener('click', () => {
-  displayValue = key.textContent;
-  screenInput.textContent += displayValue;
+  keyInput = key.textContent;
+  screenInput.textContent += keyInput;
 }))
 
 //same for every individual operator key.
 operatorsData.forEach((key) => key.addEventListener('click', () => {
-  displayValue = key.textContent;
-  screenInput.textContent += " " + displayValue + " ";
+  keyInput = key.textContent;
+  if (screenInput.textContent.split(' ').length === 3) {
+    calculate()
+    screenInput.textContent = screenOutput.textContent + " " + keyInput + " ";
+
+  }else {
+    screenInput.textContent += " " + keyInput + " ";
+  }
 }))
 
 //clear the calc screen
@@ -41,8 +47,7 @@ deleteBtn.addEventListener('click', () => {
 equalOperator.addEventListener('click', calculate);
 
 function calculate() {
-  const parameter = Array.from(screenInput.textContent.replace('x', '*').split(' '));
-  console.log(parameter);
+  const parameter = Array.from(screenInput.textContent.replace('x', '*').replace('=', '').split(' ').splice(0, 3));
   screenOutput.textContent = operate(parameter);
 }
 
