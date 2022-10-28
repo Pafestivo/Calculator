@@ -22,23 +22,23 @@ operatorsData.forEach((key) => key.addEventListener('click', () => {
 
 
 //calculation functions
-function add([...args]) {
-  const sum = args.reduce((total, next) => total + next)
+function add(a, b) {
+  const sum = a + b;
   return sum;
 }
 
-function subtract([...args]) {
-  const sum = args.reduce((total, next) => total - next)
+function subtract(a, b) {
+  const sum = a - b;
   return sum;
 }
 
-function multiply([...args]) {
-  const sum = args.reduce((total, next) => total * next)
+function multiply(a, b) {
+  const sum = a * b;
   return sum;
 }
 
-function divide([...args]) {
-  const sum = args.reduce((total, next) => total / next);
+function divide(a, b) {
+  const sum = a / b;
   if (sum === Infinity) return "ERROR"
   if (sum - Math.floor(sum) === 0) return sum;
   return sum.toFixed(2);
@@ -48,14 +48,13 @@ function divide([...args]) {
 //operate
 function operate(a, operator, b) {
   if (operator === "+") {
-    return add([a, b])
+    return add(a, b)
   } else if (operator === "-") {
-    return subtract([a, b])
+    return subtract(a, b)
   } else if (operator === "*") {
-    return multiply([a, b]) 
+    return multiply(a, b) 
   } else if (operator === "/") {
-    return divide([a, b])
+    return divide(a, b)
   }
 }
 //operate
-
