@@ -16,17 +16,26 @@ const deleteBtn = document.getElementById('delete');
 let keyInput;
 numbersData.forEach((key) => key.addEventListener('click', () => {
   keyInput = key.textContent;
-  screenInput.textContent += keyInput;
+  if (equalClicked) {
+    screenInput.textContent = keyInput;
+    equalClicked = false;
+  } else {
+    screenInput.textContent += keyInput;
+  }
 }))
 
 //same for every individual operator key.
+let equalClicked = false;
+equalOperator.addEventListener('click', () => equalClicked = true); //checking if the equal button clicked
+
 operatorsData.forEach((key) => key.addEventListener('click', () => {
   keyInput = key.textContent;
-  if (screenInput.textContent.split(' ').length === 3) {
-    calculate()
+  if (equalClicked) {
+    calculate();
+  } else if (screenInput.textContent.split(' ').length === 3) {
+    calculate();
     screenInput.textContent = screenOutput.textContent + " " + keyInput + " ";
-
-  }else {
+  } else {
     screenInput.textContent += " " + keyInput + " ";
   }
 }))
@@ -54,7 +63,7 @@ function calculate() {
 
 //calculation functions
 function add(a, b) {
-  const sum = a + b;
+  const sum = +a + +b;
   return sum;
 }
 
