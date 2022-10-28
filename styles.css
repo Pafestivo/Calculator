@@ -60,12 +60,17 @@ h1 {
   gap: 20px;
 }
 
-.top-btn {
+.top {
   width: 165px;
   height: 55px;
   border: 1px solid black;
-  border-radius: 15px;
+  border-radius: 5px;
   font-size: 0.9em;
+}
+
+.btn:hover {
+  filter: brightness(92%);
+  cursor: pointer;
 }
 
 #clear {
