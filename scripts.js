@@ -1,5 +1,22 @@
-//calculation functions
+const numbersData = document.querySelectorAll('[data-number]');
+const operatorsData = document.querySelectorAll('[data-operator]');
+const divideOperator = document.getElementById('divide');
+const multiplyOperator = document.getElementById('multiply');
+const subtractOperator = document.getElementById('subtract');
+const decimal = document.getElementById('decimal');
+const equalOperator = document.getElementById('equal');
+const sumOperator = document.getElementById('sum');
 
+let displayValue;
+numbersData.forEach((button) => {
+  button.addEventListener('click', () => {
+    displayValue = button.textContent;
+    console.log(displayValue);
+  })
+})
+
+
+//calculation functions
 function add([...args]) {
   const sum = args.reduce((total, next) => total + next)
   return sum;
@@ -36,3 +53,4 @@ function operate(a, operator, b) {
   }
 }
 //operate
+
