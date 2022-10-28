@@ -13,12 +13,15 @@ const deleteBtn = document.getElementById('delete');
 
 
 //adding event listener to every individual number key.
+let calculationFinished = false;
+equalOperator.addEventListener('click', () => calculationFinished = true); //will be used to start a new calculation
+
 let keyInput;
 numbersData.forEach((key) => key.addEventListener('click', () => {
   keyInput = key.textContent;
-  if (equalClicked) {
+  if (calculationFinished) {
     screenInput.textContent = keyInput;
-    equalClicked = false;
+    calculationFinished = false;
   } else {
     screenInput.textContent += keyInput;
   }
@@ -30,11 +33,14 @@ equalOperator.addEventListener('click', () => equalClicked = true); //checking i
 
 operatorsData.forEach((key) => key.addEventListener('click', () => {
   keyInput = key.textContent;
-  if (equalClicked) {
-    calculate();
-  } else if (screenInput.textContent.split(' ').length === 3) {
-    calculate();
-    screenInput.textContent = screenOutput.textContent + " " + keyInput + " ";
+    if (screenInput.textContent.split(' ').length === 3) {
+    if (equalClicked) {
+      calculate();
+      equalClicked = false;
+    } else {
+      calculate();
+      screenInput.textContent = screenOutput.textContent + " " + keyInput + " ";
+    }
   } else {
     screenInput.textContent += " " + keyInput + " ";
   }
@@ -58,7 +64,6 @@ equalOperator.addEventListener('click', calculate);
 function calculate() {
   const parameter = Array.from(screenInput.textContent.replace('x', '*').replace('=', '').split(' ').splice(0, 3));
   screenOutput.textContent = operate(parameter);
-  console.log(parameter);
 }
 
 
