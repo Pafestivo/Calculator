@@ -63,7 +63,7 @@ h1 {
 .top {
   width: 165px;
   height: 55px;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 5px;
   font-size: 0.9em;
 }
@@ -94,7 +94,7 @@ h1 {
   height: 65px;
   line-height: 65px;
   font-size: 0.8em;
-  background-color: rgb(212, 212, 212);
+  background-color: rgb(238, 238, 238);
   border: 2px solid black;
   text-align: center;
 }
