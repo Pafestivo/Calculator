@@ -6,19 +6,30 @@ const subtractOperator = document.getElementById('subtract');
 const decimal = document.getElementById('decimal');
 const equalOperator = document.getElementById('equal');
 const sumOperator = document.getElementById('sum');
+const screenInput = document.getElementById('screen-input');
+const screenOutput = document.getElementById('screen-output');
+const clearBtn = document.getElementById('clear');
+const deleteBtn = document.getElementById('delete');
+
 
 //adding even listener to every individual number key.
 let displayValue;
 numbersData.forEach((key) => key.addEventListener('click', () => {
   displayValue = key.textContent;
-  console.log(displayValue);
+  screenInput.textContent += displayValue;
 }))
 
 //same for every individual operator key.
 operatorsData.forEach((key) => key.addEventListener('click', () => {
   displayValue = key.textContent;
-  console.log(displayValue);
+  screenInput.textContent += displayValue;
 }))
+
+//clear the calc screen
+clearBtn.addEventListener('click', () => {
+  screenInput.textContent = ""
+  screenOutput.textContent = ""
+});
 
 
 //calculation functions
