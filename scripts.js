@@ -13,8 +13,10 @@ const screenOutput = document.getElementById('screen-output');
 const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
 
+
 clearBtn.addEventListener('click', clear);
 deleteBtn.addEventListener('click', erase);
+
 
 let inputData;
 numbersData.forEach((key) => { //event listener for each number key to show it on the screen.
@@ -38,8 +40,13 @@ function clear() {
 }
 
 function erase() {
-  let newString = screenInput.textContent.slice(0, -1);
-  screenInput.textContent = newString;
+  if(screenInput.textContent.charAt(screenInput.textContent.length - 1) === " ") { 
+    let newString = screenInput.textContent.slice(0, -2); //deletes twice if last letter is space
+    screenInput.textContent = newString;
+  } else {
+    let newString = screenInput.textContent.slice(0, -1);
+    screenInput.textContent = newString;
+  }
 }
 
 //calculation functions
