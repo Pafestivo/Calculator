@@ -77,6 +77,8 @@ function keyboardHandler(e) {
     e.key === "+"
     ) operatorClicked(e.key);
     if(e.key === "*") operatorClicked("x")
+    if(e.key === "Backspace") erase();
+    if(e.key === "Escape") clear();
 }
 
 function numberClicked(number) {
