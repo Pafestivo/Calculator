@@ -12,61 +12,6 @@ const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
 
 
-//adding event listener to every individual number key.
-let calculationFinished = false;
-equalOperator.addEventListener('click', () => calculationFinished = true); //will be used to start a new calculation
-
-let keyInput;
-numbersData.forEach((key) => key.addEventListener('click', () => {
-  keyInput = key.textContent;
-  if (calculationFinished) {
-    screenInput.textContent = keyInput;
-    calculationFinished = false;
-  } else {
-    screenInput.textContent += keyInput;
-  }
-}))
-
-//same for every individual operator key.
-let equalClicked = false;
-equalOperator.addEventListener('click', () => equalClicked = true); //checking if the equal button clicked
-
-operatorsData.forEach((key) => key.addEventListener('click', () => {
-  keyInput = key.textContent;
-    if (screenInput.textContent.split(' ').length === 3) {
-    if (equalClicked) {
-      calculate();
-      equalClicked = false;
-    } else {
-      calculate();
-      screenInput.textContent = screenOutput.textContent + " " + keyInput + " ";
-    }
-  } else {
-    screenInput.textContent += " " + keyInput + " ";
-  }
-}))
-
-//clear the calc screen
-clearBtn.addEventListener('click', () => {
-  screenInput.textContent = ""
-  screenOutput.textContent = ""
-});
-
-//delete last digit
-deleteBtn.addEventListener('click', () => {
-  const newString = screenInput.textContent.slice(0, -1)
-  screenInput.textContent = newString;
-});
-
-//calculate
-equalOperator.addEventListener('click', calculate);
-
-function calculate() {
-  const parameter = Array.from(screenInput.textContent.replace('x', '*').replace('=', '').split(' ').splice(0, 3));
-  screenOutput.textContent = operate(parameter);
-}
-
-
 //calculation functions
 function add(a, b) {
   const sum = +a + +b;
