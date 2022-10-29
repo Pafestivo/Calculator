@@ -2,11 +2,6 @@ let calculationFinished = false;
 
 const numbersData = document.querySelectorAll('[data-number]');
 const operatorsData = document.querySelectorAll('[data-operator]');
-const divideOperator = document.getElementById('divide');
-const multiplyOperator = document.getElementById('multiply');
-const subtractOperator = document.getElementById('subtract');
-const decimal = document.getElementById('decimal');
-const sumOperator = document.getElementById('sum');
 const screenInput = document.getElementById('screen-input');
 const screenOutput = document.getElementById('screen-output');
 const equalOperator = document.getElementById('equal');
@@ -18,8 +13,7 @@ clearBtn.addEventListener('click', clear);
 deleteBtn.addEventListener('click', erase);
 
 
-numbersData.forEach((key) => { //event listener for each number key to show it on the screen.
-  key.addEventListener('click', () => {
+numbersData.forEach((key) => key.addEventListener('click', () => {
     if(calculationFinished) {
       clear();
       screenInput.textContent = key.textContent
@@ -28,7 +22,7 @@ numbersData.forEach((key) => { //event listener for each number key to show it o
       screenInput.textContent += key.textContent;
     }
   })
-})
+)
 
 operatorsData.forEach((key) => { //event listener for each operator key to output it on the calc screen
   key.addEventListener('click', () => {
