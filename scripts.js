@@ -12,10 +12,10 @@ equalOperator.addEventListener('click', calculate);
 clearBtn.addEventListener('click', clear);
 deleteBtn.addEventListener('click', erase);
 
-
+//add event listener to every number button
 numbersData.forEach((key) => key.addEventListener('click', () => {
     if(calculationFinished) {
-      clear();
+      clear(); //reset calculator if equal was pressed before
       screenInput.textContent = key.textContent
       calculationFinished = false;
     } else {
@@ -24,12 +24,13 @@ numbersData.forEach((key) => key.addEventListener('click', () => {
   })
 )
 
+//add event listener for every operator button
 operatorsData.forEach((key) => { //event listener for each operator key to output it on the calc screen
   key.addEventListener('click', () => {
     if(screenInput.textContent.charAt(screenInput.textContent.length -1) === " ") { //replace operator if already given
       erase();
     }
-    else if (screenInput.textContent.replace("x", "*").split(" ").length === 3) {
+    else if (screenInput.textContent.replace("x", "*").split(" ").length === 3) {//calculate if two numbers are already given
       calculate();
       screenInput.textContent = screenOutput.textContent
       calculationFinished = false;
@@ -40,12 +41,12 @@ operatorsData.forEach((key) => { //event listener for each operator key to outpu
 
 function calculate() {
   let inputArray = screenInput.textContent.replace("x", "*").split(" ");
-  if(operate(inputArray) === Infinity || isNaN(operate(inputArray))) {
+  if(operate(inputArray) === Infinity || isNaN(operate(inputArray))) { //if divided by 0 or invalid number
     screenOutput.textContent = "ERROR"
-  } else if(operate(inputArray) - Math.floor(operate(inputArray)) === 0) {
+  } else if(operate(inputArray) - Math.floor(operate(inputArray)) === 0) { //if result has no decimal
     screenOutput.textContent = operate(inputArray)
-  } else {
-    screenOutput.textContent = operate(inputArray).toFixed(2)
+  } else { //if result has a decimal
+    screenOutput.textContent = operate(inputArray).toFixed(2) //round it to two decimal numbers
   }
   calculationFinished = true;
 }
