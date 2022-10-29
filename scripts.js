@@ -11,6 +11,20 @@ const screenOutput = document.getElementById('screen-output');
 const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
 
+let inputData;
+numbersData.forEach((key) => { //event listener for each number key to show it on the screen.
+  key.addEventListener('click', () => {
+    inputData = key.textContent;
+    screenInput.textContent += inputData;
+  })
+})
+
+operatorsData.forEach((key) => {
+  key.addEventListener('click', () => {
+    inputData = key.textContent;
+    screenInput.textContent += ` ${inputData} `;
+  })
+})
 
 //calculation functions
 function add(a, b) {
