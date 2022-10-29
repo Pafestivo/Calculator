@@ -21,23 +21,27 @@ deleteBtn.addEventListener('click', erase);
 let inputData;
 numbersData.forEach((key) => { //event listener for each number key to show it on the screen.
   key.addEventListener('click', () => {
-    inputData = key.textContent;
-    screenInput.textContent += inputData;
+    if(calculationFinished) {
+      clear();
+      screenInput.textContent = key.textContent
+      calculationFinished = false;
+    } else {
+      screenInput.textContent += key.textContent;
+    }
   })
 })
 
 operatorsData.forEach((key) => { //event listener for each operator key to output it on the calc screen
   key.addEventListener('click', () => {
-    inputData = key.textContent;
-    screenInput.textContent += ` ${inputData} `;
+    screenInput.textContent += ` ${key.textContent} `;
   })
 })
 
 function calculate() {
   let inputArray = screenInput.textContent.replace("x", "*").split(" ");
-  console.log(inputArray);
   if(operate(inputArray) === Infinity || isNaN(operate(inputArray))) screenOutput.textContent = "ERROR"
   else screenOutput.textContent = operate(inputArray);
+  calculationFinished = true;
 }
 
 function erase() {
@@ -53,7 +57,6 @@ function erase() {
 function clear() {
   screenInput.textContent = "";
   screenOutput.textContent = "";
-  calculationFinished = true;
 }
 
 //calculation functions
