@@ -11,6 +11,7 @@ const deleteBtn = document.getElementById('delete');
 equalOperator.addEventListener('click', calculate);
 clearBtn.addEventListener('click', clear);
 deleteBtn.addEventListener('click', erase);
+window.addEventListener('keydown', keyboardHandler);
 
 //add event listener to every number button
 numbersData.forEach((key) => key.addEventListener('click', () => {
@@ -64,6 +65,42 @@ function erase() {
 function clear() {
   screenInput.textContent = "";
   screenOutput.textContent = "";
+}
+
+function keyboardHandler(e) {
+  if((e.key >= 0 && e.key <= 9) || e.key === ".") numberClicked(e.key);
+  if(e.key === "Enter") calculate();
+  if(
+    e.key === "/" ||
+    e.key === "x" ||
+    e.key === "-" ||
+    e.key === "+"
+    ) operatorClicked(e.key);
+    if(e.key === "*") operatorClicked("x")
+}
+
+function numberClicked(number) {
+  {
+    if(calculationFinished) {
+      clear(); //reset calculator if equal was pressed before
+      screenInput.textContent = number;
+      calculationFinished = false;
+    } else {
+      screenInput.textContent += number;
+    }
+  }
+}
+
+function operatorClicked(operator) {
+  if(screenInput.textContent.charAt(screenInput.textContent.length -1) === " ") { //replace operator if already given
+    erase();
+  }
+  else if (screenInput.textContent.replace("x", "*").split(" ").length === 3) {//calculate if two numbers are already given
+    calculate();
+    screenInput.textContent = screenOutput.textContent
+    calculationFinished = false;
+  }
+  screenInput.textContent += ` ${operator} `;
 }
 
 //calculation functions
