@@ -1,7 +1,5 @@
 let calculationFinished = false;
 
-let operators = ['/', 'x', '-', '+'];
-
 const numbersData = document.querySelectorAll('[data-number]');
 const operatorsData = document.querySelectorAll('[data-operator]');
 const divideOperator = document.getElementById('divide');
@@ -38,14 +36,9 @@ operatorsData.forEach((key) => { //event listener for each operator key to outpu
       erase();
     }
     else if (screenInput.textContent.replace("x", "*").split(" ").length === 3) {
-      if(calculationFinished) {
-        screenInput.textContent = screenOutput.textContent
-        calculationFinished = false;
-      } else {
-        calculate();
-        screenInput.textContent = screenOutput.textContent
-        calculationFinished = false;
-      }
+      calculate();
+      screenInput.textContent = screenOutput.textContent
+      calculationFinished = false;
     }
     screenInput.textContent += ` ${key.textContent} `;
   })
