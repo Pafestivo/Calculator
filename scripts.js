@@ -1,5 +1,7 @@
 let calculationFinished = false;
 
+let operators = ['/', 'x', '-', '+'];
+
 const numbersData = document.querySelectorAll('[data-number]');
 const operatorsData = document.querySelectorAll('[data-operator]');
 const divideOperator = document.getElementById('divide');
@@ -18,7 +20,6 @@ clearBtn.addEventListener('click', clear);
 deleteBtn.addEventListener('click', erase);
 
 
-let inputData;
 numbersData.forEach((key) => { //event listener for each number key to show it on the screen.
   key.addEventListener('click', () => {
     if(calculationFinished) {
@@ -33,6 +34,9 @@ numbersData.forEach((key) => { //event listener for each number key to show it o
 
 operatorsData.forEach((key) => { //event listener for each operator key to output it on the calc screen
   key.addEventListener('click', () => {
+    if(screenInput.textContent.charAt(screenInput.textContent.length -1) === " ") {
+      erase();
+    }
     screenInput.textContent += ` ${key.textContent} `;
   })
 })
@@ -46,7 +50,7 @@ function calculate() {
 
 function erase() {
   if(screenInput.textContent.charAt(screenInput.textContent.length - 1) === " ") { 
-    let newString = screenInput.textContent.slice(0, -2); //deletes twice if last letter is space
+    let newString = screenInput.textContent.slice(0, -3); //deletes twice if last letter is space
     screenInput.textContent = newString;
   } else {
     let newString = screenInput.textContent.slice(0, -1);
