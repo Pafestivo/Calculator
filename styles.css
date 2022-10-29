@@ -42,10 +42,14 @@ h1 {
   margin: 20px 25px 0 25px;
   border: 2px solid black;
   padding-right: 40px;
+  overflow: hidden;
+  overflow-x: auto;
 }
 
 .calc-input {
   font-size: 0.85em;
+  height: 30px;
+  overflow: hidden;
 }
 
 .calc-output {
