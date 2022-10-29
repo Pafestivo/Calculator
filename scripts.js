@@ -6,14 +6,14 @@ const divideOperator = document.getElementById('divide');
 const multiplyOperator = document.getElementById('multiply');
 const subtractOperator = document.getElementById('subtract');
 const decimal = document.getElementById('decimal');
-const equalOperator = document.getElementById('equal');
 const sumOperator = document.getElementById('sum');
 const screenInput = document.getElementById('screen-input');
 const screenOutput = document.getElementById('screen-output');
+const equalOperator = document.getElementById('equal');
 const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
 
-
+equalOperator.addEventListener('click', calculate);
 clearBtn.addEventListener('click', clear);
 deleteBtn.addEventListener('click', erase);
 
@@ -33,10 +33,11 @@ operatorsData.forEach((key) => { //event listener for each operator key to outpu
   })
 })
 
-function clear() {
-  screenInput.textContent = "";
-  screenOutput.textContent = "";
-  calculationFinished = true;
+function calculate() {
+  let inputArray = screenInput.textContent.replace("x", "*").split(" ");
+  console.log(inputArray);
+  if(operate(inputArray) === Infinity || isNaN(operate(inputArray))) screenOutput.textContent = "ERROR"
+  else screenOutput.textContent = operate(inputArray);
 }
 
 function erase() {
@@ -47,6 +48,12 @@ function erase() {
     let newString = screenInput.textContent.slice(0, -1);
     screenInput.textContent = newString;
   }
+}
+
+function clear() {
+  screenInput.textContent = "";
+  screenOutput.textContent = "";
+  calculationFinished = true;
 }
 
 //calculation functions
