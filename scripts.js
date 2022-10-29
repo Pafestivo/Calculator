@@ -34,8 +34,18 @@ numbersData.forEach((key) => { //event listener for each number key to show it o
 
 operatorsData.forEach((key) => { //event listener for each operator key to output it on the calc screen
   key.addEventListener('click', () => {
-    if(screenInput.textContent.charAt(screenInput.textContent.length -1) === " ") {
+    if(screenInput.textContent.charAt(screenInput.textContent.length -1) === " ") { //replace operator if already given
       erase();
+    }
+    else if (screenInput.textContent.replace("x", "*").split(" ").length === 3) {
+      if(calculationFinished) {
+        screenInput.textContent = screenOutput.textContent
+        calculationFinished = false;
+      } else {
+        calculate();
+        screenInput.textContent = screenOutput.textContent
+        calculationFinished = false;
+      }
     }
     screenInput.textContent += ` ${key.textContent} `;
   })
@@ -43,8 +53,13 @@ operatorsData.forEach((key) => { //event listener for each operator key to outpu
 
 function calculate() {
   let inputArray = screenInput.textContent.replace("x", "*").split(" ");
-  if(operate(inputArray) === Infinity || isNaN(operate(inputArray))) screenOutput.textContent = "ERROR"
-  else screenOutput.textContent = operate(inputArray);
+  if(operate(inputArray) === Infinity || isNaN(operate(inputArray))) {
+    screenOutput.textContent = "ERROR"
+  } else if(operate(inputArray) - Math.floor(operate(inputArray)) === 0) {
+    screenOutput.textContent = operate(inputArray)
+  } else {
+    screenOutput.textContent = operate(inputArray).toFixed(2)
+  }
   calculationFinished = true;
 }
 
@@ -81,9 +96,7 @@ function multiply(a, b) {
 
 function divide(a, b) {
   const sum = a / b;
-  if (sum === Infinity) return "ERROR"
-  if (sum - Math.floor(sum) === 0) return sum;
-  return sum.toFixed(2);
+  return sum;
 }
 //end calculation functions
 
