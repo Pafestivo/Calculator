@@ -14,6 +14,7 @@ const clearBtn = document.getElementById('clear');
 const deleteBtn = document.getElementById('delete');
 
 clearBtn.addEventListener('click', clear);
+deleteBtn.addEventListener('click', erase);
 
 let inputData;
 numbersData.forEach((key) => { //event listener for each number key to show it on the screen.
@@ -34,6 +35,11 @@ function clear() {
   screenInput.textContent = "";
   screenOutput.textContent = "";
   calculationFinished = true;
+}
+
+function erase() {
+  let newString = screenInput.textContent.slice(0, -1);
+  screenInput.textContent = newString;
 }
 
 //calculation functions
