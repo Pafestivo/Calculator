@@ -28,6 +28,7 @@ numbersData.forEach((key) => key.addEventListener('click', () => {
 //add event listener for every operator button
 operatorsData.forEach((key) => { //event listener for each operator key to output it on the calc screen
   key.addEventListener('click', () => {
+    if(screenInput.textContent === "") return;
     if(screenInput.textContent.charAt(screenInput.textContent.length -1) === " ") { //replace operator if already given
       erase();
     }
@@ -41,25 +42,26 @@ operatorsData.forEach((key) => { //event listener for each operator key to outpu
 })
 
 function calculate() {
-  let inputArray = screenInput.textContent.replace("x", "*").split(" ");
+  let inputArray = screenInput.textContent.replace("x", "*").split(" "); //turn the input field into an array
+  calculationFinished = true;
   if(operate(inputArray) === Infinity || isNaN(operate(inputArray))) { //if divided by 0 or invalid number
     screenOutput.textContent = "ERROR"
+    calculationFinished = false;
   } else if(operate(inputArray) - Math.floor(operate(inputArray)) === 0) { //if result has no decimal
     screenOutput.textContent = operate(inputArray)
   } else { //if result has a decimal
     screenOutput.textContent = operate(inputArray).toFixed(2) //round it to two decimal numbers
   }
-  calculationFinished = true;
 }
 
 function erase() {
+  let newString
   if(screenInput.textContent.charAt(screenInput.textContent.length - 1) === " ") { 
-    let newString = screenInput.textContent.slice(0, -3); //deletes twice if last letter is space
-    screenInput.textContent = newString;
+    newString = screenInput.textContent.slice(0, -3); //deletes twice if last letter is space
   } else {
-    let newString = screenInput.textContent.slice(0, -1);
-    screenInput.textContent = newString;
+    newString = screenInput.textContent.slice(0, -1);
   }
+  screenInput.textContent = newString;
   deleteBtn.blur();
 }
 
@@ -96,6 +98,7 @@ function numberClicked(number) {
 }
 
 function operatorClicked(operator) {
+  if(screenInput.textContent === "") return;
   if(screenInput.textContent.charAt(screenInput.textContent.length -1) === " ") { //replace operator if already given
     erase();
   }
