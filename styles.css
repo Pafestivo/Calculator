@@ -103,3 +103,41 @@ h1 {
   border: 2px solid black;
   text-align: center;
 }
+
+@media only screen and (max-width: 700px) {
+  body {
+    font-size: 25px;
+  }
+  
+  h1 {
+    height: 70px;
+    font-size: 2.1em;
+    margin-top: 15px;
+  }
+  
+  .calc-box {
+    width: 350px;
+  }
+  
+  .top-btns {
+    margin-top: 15px;
+    gap: 10px;
+  }
+  
+  .top {
+    width: 140px;
+  }
+  
+  .all-btns {
+    width: 100px;
+    column-gap: 10px;
+    row-gap: 15px;
+    margin: 30px 10px 10px 30px;
+  }
+  
+  .key {
+    width: 65px;
+    height: 65px;
+    line-height: 65px;
+  }
+}
