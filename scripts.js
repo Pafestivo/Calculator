@@ -36,13 +36,15 @@ operatorsData.forEach((key) => { //event listener for each operator key to outpu
       screenInput.textContent = screenOutput.textContent
       calculationFinished = false;
     }
-    
+
     screenInput.textContent += ` ${key.textContent} `;
   })
 })
 
 function calculate() {
   calculationFinished = true;
+  if(screenInput.textContent === "") return;
+
   let inputArray = screenInput.textContent.replace("x", "*").split(" "); //turn the input field into an array
   //if divided by 0 or invalid number
   if(isNaN(operate(inputArray)) || operate(inputArray) === Infinity) screenOutput.textContent = "ERROR";
