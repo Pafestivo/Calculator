@@ -28,30 +28,28 @@ numbersData.forEach((key) => key.addEventListener('click', () => {
 //add event listener for every operator button
 operatorsData.forEach((key) => { //event listener for each operator key to output it on the calc screen
   key.addEventListener('click', () => {
-    if(screenInput.textContent === "") return;
-    if(screenInput.textContent.charAt(screenInput.textContent.length -1) === " ") { //replace operator if already given
-      erase();
-    }
+    if(screenInput.textContent === "" || screenOutput.textContent === "ERROR") return;
+    if(screenInput.textContent.charAt(screenInput.textContent.length -1) === " ") erase();
+
     else if (screenInput.textContent.replace("x", "*").split(" ").length === 3) {//calculate if two numbers are already given
       calculate();
       screenInput.textContent = screenOutput.textContent
       calculationFinished = false;
     }
+    
     screenInput.textContent += ` ${key.textContent} `;
   })
 })
 
 function calculate() {
-  let inputArray = screenInput.textContent.replace("x", "*").split(" "); //turn the input field into an array
   calculationFinished = true;
-  if(operate(inputArray) === Infinity || isNaN(operate(inputArray))) { //if divided by 0 or invalid number
-    screenOutput.textContent = "ERROR"
-    calculationFinished = false;
-  } else if(operate(inputArray) - Math.floor(operate(inputArray)) === 0) { //if result has no decimal
-    screenOutput.textContent = operate(inputArray)
-  } else { //if result has a decimal
-    screenOutput.textContent = operate(inputArray).toFixed(2) //round it to two decimal numbers
-  }
+  let inputArray = screenInput.textContent.replace("x", "*").split(" "); //turn the input field into an array
+  //if divided by 0 or invalid number
+  if(isNaN(operate(inputArray)) || operate(inputArray) === Infinity) screenOutput.textContent = "ERROR";
+  //if result has no decimal
+  else if(operate(inputArray) - Math.floor(operate(inputArray)) === 0) screenOutput.textContent = operate(inputArray)
+  //if result has a decimal
+  else screenOutput.textContent = operate(inputArray).toFixed(2) //round it to two decimal numbers
 }
 
 function erase() {
@@ -98,7 +96,7 @@ function numberClicked(number) {
 }
 
 function operatorClicked(operator) {
-  if(screenInput.textContent === "") return;
+  if(screenInput.textContent === "" || screenOutput.textContent === "ERROR") return;
   if(screenInput.textContent.charAt(screenInput.textContent.length -1) === " ") { //replace operator if already given
     erase();
   }
