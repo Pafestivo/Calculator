@@ -60,11 +60,13 @@ function erase() {
     let newString = screenInput.textContent.slice(0, -1);
     screenInput.textContent = newString;
   }
+  deleteBtn.blur();
 }
 
 function clear() {
   screenInput.textContent = "";
   screenOutput.textContent = "";
+  clearBtn.blur();
 }
 
 function keyboardHandler(e) {
