@@ -19,16 +19,13 @@ numbersData.forEach((key) => key.addEventListener('click', () => {
       clear(); //reset calculator if equal was pressed before
       screenInput.textContent = key.textContent
       calculationFinished = false;
-    } else {
-      screenInput.textContent += key.textContent;
-    }
+    } else screenInput.textContent += key.textContent;
   })
 )
 
 //add event listener for every operator button
-operatorsData.forEach((key) => { //event listener for each operator key to output it on the calc screen
-  key.addEventListener('click', () => {
-    if(screenInput.textContent === "" || screenOutput.textContent === "ERROR") return;
+operatorsData.forEach((key) => key.addEventListener('click', () => {
+    if(screenInput.textContent === "" || screenOutput.textContent === "ERROR") return; // do nothing with no input or error
     if(screenInput.textContent.charAt(screenInput.textContent.length -1) === " ") erase();
 
     else if (screenInput.textContent.replace("x", "*").split(" ").length === 3) {//calculate if two numbers are already given
@@ -39,7 +36,7 @@ operatorsData.forEach((key) => { //event listener for each operator key to outpu
 
     screenInput.textContent += ` ${key.textContent} `;
   })
-})
+)
 
 function calculate() {
   calculationFinished = true;
@@ -55,20 +52,19 @@ function calculate() {
 }
 
 function erase() {
+  calculationFinished = false;
   let newString
-  if(screenInput.textContent.charAt(screenInput.textContent.length - 1) === " ") { 
-    newString = screenInput.textContent.slice(0, -3); //deletes twice if last letter is space
-  } else {
-    newString = screenInput.textContent.slice(0, -1);
-  }
+  //deletes three times if last letter is space(to remove operators)
+  if(screenInput.textContent.charAt(screenInput.textContent.length - 1) === " ") newString = screenInput.textContent.slice(0, -3); 
+  else newString = screenInput.textContent.slice(0, -1);
   screenInput.textContent = newString;
-  deleteBtn.blur();
+  deleteBtn.blur(); //remove focus if the button was clicked
 }
 
 function clear() {
   screenInput.textContent = "";
   screenOutput.textContent = "";
-  clearBtn.blur();
+  clearBtn.blur(); //remove focus if the button was clicked
 }
 
 function keyboardHandler(e) {
